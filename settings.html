@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Site Settings - Accent Color</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:400,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        .accent-options {
+            display: flex;
+            gap: 24px;
+            margin: 2em 0;
+            justify-content: center;
+        }
+        .accent-btn {
+            border: 2px solid #ccc;
+            border-radius: 12px;
+            padding: 18px 28px;
+            font-size: 1.1em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            cursor: pointer;
+            background: #fff;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #0001;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .accent-btn.selected, .accent-btn:hover {
+            border: 2.5px solid var(--accent, #ffb347);
+            box-shadow: 0 4px 18px #ffb34733;
+        }
+        .accent-sample {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #eee;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Frederick Brogan</span>
+            </a>
+        </div>
+        <nav>
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="products.html"><i class="fa-solid fa-box"></i> Recommended Products</a>
+            <a href="services.html"><i class="fa-solid fa-star"></i> Recommended Services</a>
+            <a href="techsupport.html"><i class="fa-solid fa-screwdriver-wrench"></i> Tech Support</a>
+            <a href="music.html"><i class="fa-solid fa-music"></i> My Music</a>
+        <a href="settings.html" class="active"><i class="fa-solid fa-gear"></i></a>
+        </nav>
+        <button id="darkModeToggle" title="Toggle dark mode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </header>
+    <div class="cv-container">
+        <h2><i class="fa-solid fa-gear"></i> Site Settings</h2>
+        <ul style="list-style:none;padding:0;margin-bottom:2em;">
+            <li style="margin-bottom:1.2em;">
+                <strong>Accent Theme:</strong>
+                <span id="accent-sample" style="display:inline-block;width:24px;height:24px;border-radius:50%;border:2px solid #eee;vertical-align:middle;margin:0 8px 0 8px;background:linear-gradient(90deg,#ffb347 0%,#ff8c42 100%);"></span>
+                <select id="accent-select" style="padding:8px 16px; border-radius:8px; border:1.5px solid var(--accent); font-size:1.1em;">
+                    <option value="default">default</option>
+                    <option value="aqua">aqua</option>
+                    <option value="rose">rose</option>
+                    <option value="emerald">emerald</option>
+                    <option value="midnight">midnight</option>
+                </select>
+            </li>
+            <li style="margin-bottom:1.2em;">
+                <strong>Custom Palette:</strong>
+                <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;">
+                    <label>Primary: <input type="color" id="primary-color" value="#4f8cff"></label>
+                    <label>Primary Dark: <input type="color" id="primary-dark-color" value="#2b50a1"></label>
+                    <label>Accent: <input type="color" id="accent-color" value="#ffb347"></label>
+                    <label>Accent Dark: <input type="color" id="accent-dark-color" value="#ff8c42"></label>
+                    <label>Background: <input type="color" id="background-color" value="#f4f7fb"></label>
+                </div>
+            </li>
+            <li>
+                <button id="reset-theme" style="margin-top:10px;padding:8px 18px;border-radius:8px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;font-weight:600;cursor:pointer;">
+                    Reset to Default
+                </button>
+            </li>
+        </ul>
+        <p style="text-align:center;margin-top:2em;">
+            <a href="index.html" style="color:var(--primary);text-decoration:underline;">&larr; Back to Home</a>
+        </p>
+    </div>
+    <footer>
+        <p>&copy; 2025 Frederick Brogan. All rights reserved.</p>
+    </footer>
+    <div class="sub-footer">
+        <p>
+            <i class="fa-solid fa-code"></i> Built with ❤️ by Frederick Brogan &mdash; 
+            <a href="mailto:frederickbrogan1892@gmail.com">Contact Me</a>
+        </p>
+    </div>
+    <script>
+// Accent color support
+const accentPresets = {
+    "default": {"--accent":"#ffb347","--accent-dark":"#ff8c42"},
+    "aqua": {"--accent":"#38b6ff","--accent-dark":"#6f38c5"},
+    "rose": {"--accent":"#ff5e62","--accent-dark":"#ff9966"},
+    "emerald": {"--accent":"#43e97b","--accent-dark":"#38f9d7"},
+    "midnight": {"--accent":"#232946","--accent-dark":"#6f38c5"}
+};
+const accentGradients = {
+    "default": "linear-gradient(90deg,#ffb347 0%,#ff8c42 100%)",
+    "aqua": "linear-gradient(90deg,#38b6ff 0%,#6f38c5 100%)",
+    "rose": "linear-gradient(90deg,#ff5e62 0%,#ff9966 100%)",
+    "emerald": "linear-gradient(90deg,#43e97b 0%,#38f9d7 100%)",
+    "midnight": "linear-gradient(90deg,#232946 0%,#6f38c5 100%)"
+};
+const defaultPalette = {
+    "--primary": "#4f8cff",
+    "--primary-dark": "#2b50a1",
+    "--accent": "#ffb347",
+    "--accent-dark": "#ff8c42",
+    "--background": "#f4f7fb"
+};
+
+function setAccent(accent) {
+    const preset = accentPresets[accent] || accentPresets["default"];
+    for (const key in preset) {
+        document.documentElement.style.setProperty(key, preset[key]);
+    }
+    localStorage.setItem('accent', accent);
+    document.getElementById('accent-select').value = accent;
+    document.getElementById('accent-sample').style.background = accentGradients[accent] || accentGradients["default"];
+    updateAccentSampleBorder();
+    // Update color pickers to match accent
+    document.getElementById('accent-color').value = rgbToHex(getComputedStyle(document.documentElement).getPropertyValue('--accent'));
+    document.getElementById('accent-dark-color').value = rgbToHex(getComputedStyle(document.documentElement).getPropertyValue('--accent-dark'));
+}
+
+function updateAccentSampleBorder() {
+    const sample = document.getElementById('accent-sample');
+    if (!sample) return;
+    if (document.body.classList.contains('dark-mode')) {
+        sample.style.border = '2px solid #b0b8d1';
+    } else {
+        sample.style.border = '2px solid #eee';
+    }
+}
+
+// Helper to convert rgb/rgba to hex
+function rgbToHex(rgb) {
+    if (!rgb) return "#000000";
+    rgb = rgb.trim();
+    if (rgb.startsWith("#")) return rgb;
+    let result = rgb.match(/\d+/g);
+    if (!result) return "#000000";
+    return "#" + result.slice(0,3).map(x => ("0"+parseInt(x).toString(16)).slice(-2)).join('');
+}
+
+// On load, set accent and palette from localStorage
+const savedAccent = localStorage.getItem('accent') || "default";
+setAccent(savedAccent);
+
+// Set palette from localStorage if present
+const paletteKeys = Object.keys(defaultPalette);
+paletteKeys.forEach(key => {
+    const stored = localStorage.getItem(key);
+    if (stored) document.documentElement.style.setProperty(key, stored);
+    // Set color pickers to current value
+    const pickerId = key.replace('--','') + "-color";
+    const picker = document.getElementById(pickerId);
+    if (picker) picker.value = rgbToHex(getComputedStyle(document.documentElement).getPropertyValue(key));
+});
+
+// Dropdown listener
+document.getElementById('accent-select').addEventListener('change', function() {
+    setAccent(this.value);
+});
+
+// Palette listeners
+document.getElementById('primary-color').addEventListener('input', function() {
+    document.documentElement.style.setProperty('--primary', this.value);
+    localStorage.setItem('--primary', this.value);
+});
+document.getElementById('primary-dark-color').addEventListener('input', function() {
+    document.documentElement.style.setProperty('--primary-dark', this.value);
+    localStorage.setItem('--primary-dark', this.value);
+});
+document.getElementById('accent-color').addEventListener('input', function() {
+    document.documentElement.style.setProperty('--accent', this.value);
+    localStorage.setItem('--accent', this.value);
+});
+document.getElementById('accent-dark-color').addEventListener('input', function() {
+    document.documentElement.style.setProperty('--accent-dark', this.value);
+    localStorage.setItem('--accent-dark', this.value);
+});
+document.getElementById('background-color').addEventListener('input', function() {
+    document.documentElement.style.setProperty('--background', this.value);
+    localStorage.setItem('--background', this.value);
+});
+
+// Reset to default
+document.getElementById('reset-theme').addEventListener('click', function() {
+    // Reset accent
+    setAccent("default");
+    localStorage.setItem('accent', "default");
+    // Reset palette
+    paletteKeys.forEach(key => {
+        document.documentElement.style.setProperty(key, defaultPalette[key]);
+        localStorage.removeItem(key);
+        // Update color pickers
+        const pickerId = key.replace('--','') + "-color";
+        const picker = document.getElementById(pickerId);
+        if (picker) picker.value = defaultPalette[key];
+    });
+});
+
+// Dark mode toggle
+const toggleBtn = document.getElementById('darkModeToggle');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (localStorage.getItem('darkMode') === 'on' || (!localStorage.getItem('darkMode') && prefersDark)) {
+    document.body.classList.add('dark-mode');
+    updateAccentSampleBorder();
+}
+toggleBtn.onclick = function() {
+    document.body.classList.toggle('dark-mode');
+    if(document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'on');
+    } else {
+        localStorage.setItem('darkMode', 'off');
+    }
+    updateAccentSampleBorder();
+};
+    </script>
+</body>
+</html>
